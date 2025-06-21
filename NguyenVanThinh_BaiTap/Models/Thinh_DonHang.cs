@@ -50,6 +50,5 @@ namespace NguyenVanThinh_BaiTap.Models
 
         // Navigation property
         public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHangs { get; set; }
-
     }
 }
