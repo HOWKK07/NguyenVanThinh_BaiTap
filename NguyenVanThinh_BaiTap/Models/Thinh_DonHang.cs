@@ -41,12 +41,15 @@ namespace NguyenVanThinh_BaiTap.Models
 
         [Required]
         [StringLength(50)]
-        public string TrangThai { get; set; } = "Chờ xác nhận"; // Chờ xác nhận, Đã xác nhận, Đang giao, Đã giao, Đã hủy
+        public string TrangThai { get; set; } = "Chờ xác nhận";
 
         public DateTime? NgayGiao { get; set; }
 
         [StringLength(50)]
-        public string PhuongThucThanhToan { get; set; } = "Tiền mặt"; // Tiền mặt, Chuyển khoản, Thẻ tín dụng
+        public string PhuongThucThanhToan { get; set; } = "Tiền mặt";
+
+        // Navigation property
+        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHangs { get; set; }
 
     }
 }
