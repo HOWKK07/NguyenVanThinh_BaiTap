@@ -1,0 +1,15 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_HangXe
+@{
+    ViewData["Title"] = "Sửa Hãng Xe";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Thinh_HangXeID" />
+    <div class="mb-3">
+        <label asp-for="Thinh_TenHang" class="form-label"></label>
+        <input asp-for="Thinh_TenHang" class="form-control" />
+        <span asp-validation-for="Thinh_TenHang" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

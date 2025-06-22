@@ -18,13 +18,13 @@ namespace NguyenVanThinh_BaiTap.Repositories
 
         public Thinh_HangXe GetById(int id) => _context.Thinh_HangXes.Find(id);
 
-        public void Add(Thinh_HangXe category)
+        public void Create(Thinh_HangXe category)
         {
             _context.Thinh_HangXes.Add(category);
             _context.SaveChanges();
         }
 
-        public void Update(Thinh_HangXe category)
+        public void Edit(Thinh_HangXe category)
         {
             _context.Thinh_HangXes.Update(category);
             _context.SaveChanges();

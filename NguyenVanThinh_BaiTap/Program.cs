@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NguyenVanThinh_BaiTap.Data;
+using NguyenVanThinh_BaiTap.Repositories;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add repositories
+builder.Services.AddScoped<IXeRepository, EFXeRepository>();
+builder.Services.AddScoped<IHangXeRepository, EFHangXeRepository>();
 
+// Add session support for shopping cart
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -22,7 +33,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
+
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

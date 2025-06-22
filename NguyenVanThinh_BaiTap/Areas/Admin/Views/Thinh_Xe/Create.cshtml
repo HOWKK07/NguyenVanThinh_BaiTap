@@ -1,0 +1,29 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_Xe
+@{
+    ViewData["Title"] = "Thêm Xe";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Thinh_TenXe" class="form-label"></label>
+        <input asp-for="Thinh_TenXe" class="form-control" />
+        <span asp-validation-for="Thinh_TenXe" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Thinh_HangXeID" class="form-label"></label>
+        <select asp-for="Thinh_HangXeID" class="form-control" asp-items="ViewBag.Thinh_HangXeID"></select>
+        <span asp-validation-for="Thinh_HangXeID" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Thinh_Gia" class="form-label"></label>
+        <input asp-for="Thinh_Gia" class="form-control" />
+        <span asp-validation-for="Thinh_Gia" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Thinh_NgaySanXuat" class="form-label"></label>
+        <input asp-for="Thinh_NgaySanXuat" class="form-control" type="date" />
+        <span asp-validation-for="Thinh_NgaySanXuat" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NguyenVanThinh_BaiTap.Models.Thinh_HangXe>
+@{
+    ViewData["Title"] = "Danh sách Hãng Xe";
+}
+<h2>@ViewData["Title"]</h2>
+<form asp-action="Index" method="get" class="mb-3">
+    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Tìm kiếm hãng xe..." class="form-control" style="width:300px;display:inline-block;" />
+    <button type="submit" class="btn btn-primary">Tìm</button>
+    <a asp-action="Create" class="btn btn-success float-end">Thêm mới</a>
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên Hãng</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Thinh_TenHang</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Thinh_HangXeID" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.Thinh_HangXeID" class="btn btn-danger btn-sm">Xóa</a>
+                    <a asp-action="Details" asp-route-id="@item.Thinh_HangXeID" class="btn btn-info btn-sm">Chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}

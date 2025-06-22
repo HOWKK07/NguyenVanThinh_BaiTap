@@ -1,0 +1,11 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_Xe
+@{
+    ViewData["Title"] = "Xóa Xe";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>Bạn có chắc chắn muốn xóa xe "@Model.Thinh_TenXe"?</h3>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Thinh_XeID" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>
