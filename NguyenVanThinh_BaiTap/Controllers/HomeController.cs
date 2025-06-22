@@ -16,14 +16,14 @@ namespace NguyenVanThinh_BaiTap.Controllers
 
         public async Task<IActionResult> Index(int? hangXeId)
         {
-            var xes = _context.Thinh_Xes.Include(x => x.Thinh_HangXe).AsQueryable();
+            var xes = _context.Thinh_Xe.Include(x => x.Thinh_HangXe).AsQueryable();
 
             if (hangXeId.HasValue)
             {
                 xes = xes.Where(x => x.Thinh_HangXeID == hangXeId.Value);
             }
 
-            ViewBag.HangXes = await _context.Thinh_HangXes.ToListAsync();
+            ViewBag.HangXes = await _context.Thinh_HangXe.ToListAsync();
             ViewBag.SelectedHangXeId = hangXeId;
 
             return View(await xes.ToListAsync());

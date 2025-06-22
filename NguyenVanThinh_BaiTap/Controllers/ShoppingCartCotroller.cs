@@ -24,7 +24,7 @@ namespace NguyenVanThinh_BaiTap.Controllers
         [HttpPost]
         public IActionResult AddToCart(int id)
         {
-            var xe = _context.Thinh_Xes
+            var xe = _context.Thinh_Xe
                 .Include(x => x.Thinh_HangXe)
                 .FirstOrDefault(x => x.Thinh_XeID == id);
 
@@ -81,7 +81,7 @@ namespace NguyenVanThinh_BaiTap.Controllers
                 order.TongTien = cart.Sum(x => x.Thinh_Gia);
                 order.TrangThai = "Chờ xác nhận";
 
-                _context.Thinh_DonHangs.Add(order);
+                _context.Thinh_DonHang.Add(order);
                 _context.SaveChanges();
 
                 // Thêm chi tiết đơn hàng
@@ -94,7 +94,7 @@ namespace NguyenVanThinh_BaiTap.Controllers
                         SoLuong = 1,
                         DonGia = xe.Thinh_Gia
                     };
-                    _context.Thinh_ChiTietDonHangs.Add(chiTiet);
+                    _context.Thinh_ChiTietDonHang.Add(chiTiet);
                 }
 
                 _context.SaveChanges();

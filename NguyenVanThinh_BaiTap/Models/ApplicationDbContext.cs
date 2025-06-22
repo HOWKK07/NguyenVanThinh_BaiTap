@@ -10,10 +10,10 @@ namespace NguyenVanThinh_BaiTap.Data
         {
         }
 
-        public DbSet<Thinh_HangXe> Thinh_HangXes { get; set; }
-        public DbSet<Thinh_Xe> Thinh_Xes { get; set; }
-        public DbSet<Thinh_DonHang> Thinh_DonHangs { get; set; }
-        public DbSet<Thinh_ChiTietDonHang> Thinh_ChiTietDonHangs { get; set; }
+        public DbSet<Thinh_HangXe> Thinh_HangXe { get; set; }
+        public DbSet<Thinh_Xe> Thinh_Xe { get; set; }
+        public DbSet<Thinh_DonHang> Thinh_DonHang { get; set; }
+        public DbSet<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
 
         }
     }

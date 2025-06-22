@@ -3,13 +3,34 @@
     ViewData["Title"] = "Sửa Hãng Xe";
 }
 <h2>@ViewData["Title"]</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="Thinh_HangXeID" />
+
     <div class="mb-3">
-        <label asp-for="Thinh_TenHang" class="form-label"></label>
+        <label asp-for="Thinh_TenHang" class="form-label">Tên Hãng Xe</label>
         <input asp-for="Thinh_TenHang" class="form-control" />
         <span asp-validation-for="Thinh_TenHang" class="text-danger"></span>
     </div>
+
     <button type="submit" class="btn btn-primary">Cập nhật</button>
     <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

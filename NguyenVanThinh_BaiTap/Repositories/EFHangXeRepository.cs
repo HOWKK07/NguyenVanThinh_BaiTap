@@ -14,28 +14,28 @@ namespace NguyenVanThinh_BaiTap.Repositories
             _context = context;
         }
 
-        public IEnumerable<Thinh_HangXe> GetAll() => _context.Thinh_HangXes.ToList();
+        public IEnumerable<Thinh_HangXe> GetAll() => _context.Thinh_HangXe.ToList();
 
-        public Thinh_HangXe GetById(int id) => _context.Thinh_HangXes.Find(id);
+        public Thinh_HangXe GetById(int id) => _context.Thinh_HangXe.Find(id);
 
-        public void Create(Thinh_HangXe category)
+        public void Create(Thinh_HangXe hangXe)
         {
-            _context.Thinh_HangXes.Add(category);
-            _context.SaveChanges();
+            _context.Thinh_HangXe.Add(hangXe);
+            _context.SaveChanges(); // Dòng này bắt buộc phải có!
         }
 
-        public void Edit(Thinh_HangXe category)
+        public void Edit(Thinh_HangXe hangXe)
         {
-            _context.Thinh_HangXes.Update(category);
+            _context.Thinh_HangXe.Update(hangXe);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var category = _context.Thinh_HangXes.Find(id);
-            if (category != null)
+            var hangXe = _context.Thinh_HangXe.Find(id);
+            if (hangXe != null)
             {
-                _context.Thinh_HangXes.Remove(category);
+                _context.Thinh_HangXe.Remove(hangXe);
                 _context.SaveChanges();
             }
         }

@@ -25,7 +25,7 @@ namespace NguyenVanThinh_BaiTap.Models
 
         // Navigation property
         public virtual Thinh_HangXe Thinh_HangXe { get; set; }
-        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHangs { get; set; }
+        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
 
     }
 }

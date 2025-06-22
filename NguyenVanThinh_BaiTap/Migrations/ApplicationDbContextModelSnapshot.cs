@@ -55,7 +55,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
 
                     b.HasIndex("Thinh_XeID");
 
-                    b.ToTable("Thinh_ChiTietDonHangs");
+                    b.ToTable("Thinh_ChiTietDonHang");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_DonHang", b =>
@@ -116,7 +116,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
 
                     b.HasKey("Thinh_DonHangID");
 
-                    b.ToTable("Thinh_DonHangs");
+                    b.ToTable("Thinh_DonHang");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_HangXe", b =>
@@ -134,7 +134,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
 
                     b.HasKey("Thinh_HangXeID");
 
-                    b.ToTable("Thinh_HangXes");
+                    b.ToTable("Thinh_HangXe");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_Xe", b =>
@@ -163,19 +163,19 @@ namespace NguyenVanThinh_BaiTap.Migrations
 
                     b.HasIndex("Thinh_HangXeID");
 
-                    b.ToTable("Thinh_Xes");
+                    b.ToTable("Thinh_Xe");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_ChiTietDonHang", b =>
                 {
                     b.HasOne("NguyenVanThinh_BaiTap.Models.Thinh_DonHang", "Thinh_DonHang")
-                        .WithMany("Thinh_ChiTietDonHangs")
+                        .WithMany("Thinh_ChiTietDonHang")
                         .HasForeignKey("Thinh_DonHangID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("NguyenVanThinh_BaiTap.Models.Thinh_Xe", "Thinh_Xe")
-                        .WithMany("Thinh_ChiTietDonHangs")
+                        .WithMany("Thinh_ChiTietDonHang")
                         .HasForeignKey("Thinh_XeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -188,7 +188,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_Xe", b =>
                 {
                     b.HasOne("NguyenVanThinh_BaiTap.Models.Thinh_HangXe", "Thinh_HangXe")
-                        .WithMany("Thinh_Xes")
+                        .WithMany("Thinh_Xe")
                         .HasForeignKey("Thinh_HangXeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -198,17 +198,17 @@ namespace NguyenVanThinh_BaiTap.Migrations
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_DonHang", b =>
                 {
-                    b.Navigation("Thinh_ChiTietDonHangs");
+                    b.Navigation("Thinh_ChiTietDonHang");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_HangXe", b =>
                 {
-                    b.Navigation("Thinh_Xes");
+                    b.Navigation("Thinh_Xe");
                 });
 
             modelBuilder.Entity("NguyenVanThinh_BaiTap.Models.Thinh_Xe", b =>
                 {
-                    b.Navigation("Thinh_ChiTietDonHangs");
+                    b.Navigation("Thinh_ChiTietDonHang");
                 });
 #pragma warning restore 612, 618
         }

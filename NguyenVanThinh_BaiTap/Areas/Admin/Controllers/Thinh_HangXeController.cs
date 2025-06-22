@@ -21,7 +21,7 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
         // GET: Admin/Thinh_HangXe
         public async Task<IActionResult> Index(string searchString)
         {
-            var hangXes = _context.Thinh_HangXes.AsQueryable();
+            var hangXes = _context.Thinh_HangXe.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -40,8 +40,8 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hangXe = await _context.Thinh_HangXes
-                .Include(h => h.Thinh_Xes)
+            var hangXe = await _context.Thinh_HangXe
+                .Include(h => h.Thinh_Xe)
                 .FirstOrDefaultAsync(m => m.Thinh_HangXeID == id);
 
             if (hangXe == null)
@@ -129,8 +129,8 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hangXe = await _context.Thinh_HangXes
-                .Include(h => h.Thinh_Xes)
+            var hangXe = await _context.Thinh_HangXe
+                .Include(h => h.Thinh_Xe)
                 .FirstOrDefaultAsync(m => m.Thinh_HangXeID == id);
 
             if (hangXe == null)
@@ -146,11 +146,11 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hangXe = await _context.Thinh_HangXes
-                .Include(h => h.Thinh_Xes)
+            var hangXe = await _context.Thinh_HangXe
+                .Include(h => h.Thinh_Xe)
                 .FirstOrDefaultAsync(h => h.Thinh_HangXeID == id);
 
-            if (hangXe.Thinh_Xes.Any())
+            if (hangXe.Thinh_Xe.Any())
             {
                 TempData["ErrorMessage"] = "Không thể xóa hãng xe này vì còn xe thuộc hãng!";
                 return RedirectToAction(nameof(Index));

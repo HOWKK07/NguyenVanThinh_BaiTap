@@ -24,7 +24,7 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
         // GET: Admin/Thinh_Xe
         public async Task<IActionResult> Index(string searchString)
         {
-            var xes = _context.Thinh_Xes.Include(x => x.Thinh_HangXe).AsQueryable();
+            var xes = _context.Thinh_Xe.Include(x => x.Thinh_HangXe).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -44,7 +44,7 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var xe = await _context.Thinh_Xes
+            var xe = await _context.Thinh_Xe
                 .Include(x => x.Thinh_HangXe)
                 .FirstOrDefaultAsync(m => m.Thinh_XeID == id);
 
@@ -137,7 +137,7 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var xe = await _context.Thinh_Xes
+            var xe = await _context.Thinh_Xe
                 .Include(x => x.Thinh_HangXe)
                 .FirstOrDefaultAsync(m => m.Thinh_XeID == id);
 

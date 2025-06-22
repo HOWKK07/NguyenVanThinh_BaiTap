@@ -14,28 +14,28 @@ namespace NguyenVanThinh_BaiTap.Repositories
             _context = context;
         }
 
-        public IEnumerable<Thinh_Xe> GetAll() => _context.Thinh_Xes.ToList();
+        public IEnumerable<Thinh_Xe> GetAll() => _context.Thinh_Xe.ToList();
 
-        public Thinh_Xe GetById(int id) => _context.Thinh_Xes.Find(id);
+        public Thinh_Xe GetById(int id) => _context.Thinh_Xe.Find(id);
 
         public void Add(Thinh_Xe product)
         {
-            _context.Thinh_Xes.Add(product);
+            _context.Thinh_Xe.Add(product);
             _context.SaveChanges();
         }
 
         public void Update(Thinh_Xe product)
         {
-            _context.Thinh_Xes.Update(product);
+            _context.Thinh_Xe.Update(product);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var product = _context.Thinh_Xes.Find(id);
+            var product = _context.Thinh_Xe.Find(id);
             if (product != null)
             {
-                _context.Thinh_Xes.Remove(product);
+                _context.Thinh_Xe.Remove(product);
                 _context.SaveChanges();
             }
         }

@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NguyenVanThinh_BaiTap.Migrations
 {
     /// <inheritdoc />
-    public partial class QuanLyXe : Migration
+    public partial class ThinhQLXe : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Thinh_DonHangs",
+                name: "Thinh_DonHang",
                 columns: table => new
                 {
                     Thinh_DonHangID = table.Column<int>(type: "int", nullable: false)
@@ -31,11 +31,11 @@ namespace NguyenVanThinh_BaiTap.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Thinh_DonHangs", x => x.Thinh_DonHangID);
+                    table.PrimaryKey("PK_Thinh_DonHang", x => x.Thinh_DonHangID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Thinh_HangXes",
+                name: "Thinh_HangXe",
                 columns: table => new
                 {
                     Thinh_HangXeID = table.Column<int>(type: "int", nullable: false)
@@ -44,11 +44,11 @@ namespace NguyenVanThinh_BaiTap.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Thinh_HangXes", x => x.Thinh_HangXeID);
+                    table.PrimaryKey("PK_Thinh_HangXe", x => x.Thinh_HangXeID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Thinh_Xes",
+                name: "Thinh_Xe",
                 columns: table => new
                 {
                     Thinh_XeID = table.Column<int>(type: "int", nullable: false)
@@ -60,17 +60,17 @@ namespace NguyenVanThinh_BaiTap.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Thinh_Xes", x => x.Thinh_XeID);
+                    table.PrimaryKey("PK_Thinh_Xe", x => x.Thinh_XeID);
                     table.ForeignKey(
-                        name: "FK_Thinh_Xes_Thinh_HangXes_Thinh_HangXeID",
+                        name: "FK_Thinh_Xe_Thinh_HangXe_Thinh_HangXeID",
                         column: x => x.Thinh_HangXeID,
-                        principalTable: "Thinh_HangXes",
+                        principalTable: "Thinh_HangXe",
                         principalColumn: "Thinh_HangXeID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Thinh_ChiTietDonHangs",
+                name: "Thinh_ChiTietDonHang",
                 columns: table => new
                 {
                     Thinh_ChiTietDonHangID = table.Column<int>(type: "int", nullable: false)
@@ -84,34 +84,34 @@ namespace NguyenVanThinh_BaiTap.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Thinh_ChiTietDonHangs", x => x.Thinh_ChiTietDonHangID);
+                    table.PrimaryKey("PK_Thinh_ChiTietDonHang", x => x.Thinh_ChiTietDonHangID);
                     table.ForeignKey(
-                        name: "FK_Thinh_ChiTietDonHangs_Thinh_DonHangs_Thinh_DonHangID",
+                        name: "FK_Thinh_ChiTietDonHang_Thinh_DonHang_Thinh_DonHangID",
                         column: x => x.Thinh_DonHangID,
-                        principalTable: "Thinh_DonHangs",
+                        principalTable: "Thinh_DonHang",
                         principalColumn: "Thinh_DonHangID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Thinh_ChiTietDonHangs_Thinh_Xes_Thinh_XeID",
+                        name: "FK_Thinh_ChiTietDonHang_Thinh_Xe_Thinh_XeID",
                         column: x => x.Thinh_XeID,
-                        principalTable: "Thinh_Xes",
+                        principalTable: "Thinh_Xe",
                         principalColumn: "Thinh_XeID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Thinh_ChiTietDonHangs_Thinh_DonHangID",
-                table: "Thinh_ChiTietDonHangs",
+                name: "IX_Thinh_ChiTietDonHang_Thinh_DonHangID",
+                table: "Thinh_ChiTietDonHang",
                 column: "Thinh_DonHangID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Thinh_ChiTietDonHangs_Thinh_XeID",
-                table: "Thinh_ChiTietDonHangs",
+                name: "IX_Thinh_ChiTietDonHang_Thinh_XeID",
+                table: "Thinh_ChiTietDonHang",
                 column: "Thinh_XeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Thinh_Xes_Thinh_HangXeID",
-                table: "Thinh_Xes",
+                name: "IX_Thinh_Xe_Thinh_HangXeID",
+                table: "Thinh_Xe",
                 column: "Thinh_HangXeID");
         }
 
@@ -119,16 +119,16 @@ namespace NguyenVanThinh_BaiTap.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Thinh_ChiTietDonHangs");
+                name: "Thinh_ChiTietDonHang");
 
             migrationBuilder.DropTable(
-                name: "Thinh_DonHangs");
+                name: "Thinh_DonHang");
 
             migrationBuilder.DropTable(
-                name: "Thinh_Xes");
+                name: "Thinh_Xe");
 
             migrationBuilder.DropTable(
-                name: "Thinh_HangXes");
+                name: "Thinh_HangXe");
         }
     }
 }

@@ -49,6 +49,6 @@ namespace NguyenVanThinh_BaiTap.Models
         public string PhuongThucThanhToan { get; set; } = "Tiền mặt";
 
         // Navigation property
-        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHangs { get; set; }
+        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
     }
 }
