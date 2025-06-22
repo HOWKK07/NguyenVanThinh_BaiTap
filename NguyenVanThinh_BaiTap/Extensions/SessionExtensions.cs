@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json; // Ensure Newtonsoft.Json is installed via NuGet
+using Newtonsoft.Json;
 
-public static class SessionExtensions
+namespace NguyenVanThinh_BaiTap.Extensions
 {
-    public static void SetObjectAsJson(this ISession session, string key, object value)
+    public static class SessionExtensions
     {
-        session.SetString(key, JsonConvert.SerializeObject(value)); // JsonConvert is part of Newtonsoft.Json
-    }
+        public static void SetObjectAsJson(this ISession session, string key, object value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
 
-    public static T GetObjectFromJson<T>(this ISession session, string key)
-    {
-        var value = session.GetString(key);
-        return value == null ? default : JsonConvert.DeserializeObject<T>(value); // JsonConvert is part of Newtonsoft.Json
+        public static T GetObjectFromJson<T>(this ISession session, string key)
+        {
+            var value = session.GetString(key);
+            return value == null ? default : JsonConvert.DeserializeObject<T>(value);
+        }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_DonHang
+@{
+    ViewData["Title"] = "Xóa Đơn Hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-danger">
+    <h3>Bạn có chắc chắn muốn xóa đơn hàng này?</h3>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Mã đơn hàng:</dt>
+            <dd class="col-sm-9">@Model.MaDonHang</dd>
+
+            <dt class="col-sm-3">Ngày đặt:</dt>
+            <dd class="col-sm-9">@Model.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-3">Khách hàng:</dt>
+            <dd class="col-sm-9">@Model.TenKhachHang</dd>
+
+            <dt class="col-sm-3">Tổng tiền:</dt>
+            <dd class="col-sm-9 text-danger">@Model.TongTien.ToString("N0") VNĐ</dd>
+
+            <dt class="col-sm-3">Trạng thái:</dt>
+            <dd class="col-sm-9">@Model.TrangThai</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete" method="post" class="d-inline">
+            <input type="hidden" asp-for="Thinh_DonHangID" />
+            <button type="submit" class="btn btn-danger">Xóa</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </div>
+</div>

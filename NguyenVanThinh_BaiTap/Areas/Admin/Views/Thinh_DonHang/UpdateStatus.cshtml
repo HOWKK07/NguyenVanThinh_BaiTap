@@ -1,0 +1,33 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_DonHang
+@{
+    ViewData["Title"] = "Cập nhật trạng thái đơn hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4>Đơn hàng: @Model.MaDonHang</h4>
+        <p>Khách hàng: @Model.TenKhachHang</p>
+        <p>Trạng thái hiện tại: <strong>@Model.TrangThai</strong></p>
+
+        <form asp-action="UpdateStatus" method="post">
+            <input type="hidden" asp-for="Thinh_DonHangID" />
+
+            <div class="form-group">
+                <label for="TrangThai">Trạng thái mới:</label>
+                <select name="TrangThai" class="form-control">
+                    @foreach (var trangThai in ViewBag.TrangThaiList)
+                    {
+                        <option value="@trangThai" selected="@(Model.TrangThai == trangThai)">
+                            @trangThai
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>

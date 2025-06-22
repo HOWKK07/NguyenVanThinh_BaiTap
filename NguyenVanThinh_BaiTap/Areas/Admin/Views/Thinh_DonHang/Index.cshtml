@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NguyenVanThinh_BaiTap.Models.Thinh_DonHang>
+@{
+    ViewData["Title"] = "Danh sách Đơn Hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
+            <th>Khách hàng</th>
+            <th>Số điện thoại</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDonHang</td>
+                <td>@item.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.TenKhachHang</td>
+                <td>@item.SoDienThoai</td>
+                <td class="text-danger">@item.TongTien.ToString("N0") VNĐ</td>
+                <td>
+                    <span class="badge @(item.TrangThai switch
+                          {
+                              "Chờ xác nhận" => "badge-warning",
+                              "Đã xác nhận" => "badge-info",
+                              "Đang giao hàng" => "badge-primary",
+                              "Đã giao hàng" => "badge-success",
+                              "Đã hủy" => "badge-danger",
+                              _ => "badge-secondary"
+                          })">
+                    @item.TrangThai
+                </span>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Thinh_DonHangID" class="btn btn-info btn-sm">Chi tiết</a>
+                <a asp-action="UpdateStatus" asp-route-id="@item.Thinh_DonHangID" class="btn btn-warning btn-sm">Cập nhật</a>
+                <a asp-action="Delete" asp-route-id="@item.Thinh_DonHangID" class="btn btn-danger btn-sm">Xóa</a>
+            </td>
+        </tr>
+                }
+    </tbody>
+</table>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<style>
+    .badge-warning { background-color: #ffc107; }
+    .badge-info { background-color: #17a2b8; }
+    .badge-primary { background-color: #007bff; }
+    .badge-success { background-color: #28a745; }
+    .badge-danger { background-color: #dc3545; }
+    .badge-secondary { background-color: #6c757d; }
+    .badge { padding: 5px 10px; border-radius: 3px; color: white; }
+</style>

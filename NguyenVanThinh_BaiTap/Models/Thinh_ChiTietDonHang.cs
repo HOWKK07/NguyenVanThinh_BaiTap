@@ -24,13 +24,17 @@ namespace NguyenVanThinh_BaiTap.Models
         public decimal DonGia { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal ThanhTien { get; private set; }
+        public decimal ThanhTien
+        {
+            get { return SoLuong * DonGia; }
+            private set { }
+        }
 
         [StringLength(500)]
         public string? GhiChu { get; set; }
 
         // Navigation properties
-        public virtual Thinh_DonHang Thinh_DonHang { get; set; }
-        public virtual Thinh_Xe Thinh_Xe { get; set; }
+        public virtual Thinh_DonHang? Thinh_DonHang { get; set; }
+        public virtual Thinh_Xe? Thinh_Xe { get; set; }
     }
 }
