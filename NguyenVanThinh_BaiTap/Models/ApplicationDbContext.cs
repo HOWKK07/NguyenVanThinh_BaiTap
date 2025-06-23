@@ -15,5 +15,5 @@ namespace NguyenVanThinh_BaiTap.Data
         public DbSet<Thinh_DonHang> Thinh_DonHang { get; set; }
         public DbSet<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
 
-        }
     }
+}

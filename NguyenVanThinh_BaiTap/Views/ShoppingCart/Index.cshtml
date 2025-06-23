@@ -1,0 +1,53 @@
+﻿@model List<CartItem>
+@{
+    ViewData["Title"] = "Giỏ hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Giỏ hàng của bạn đang trống.
+    </div>
+}
+else
+{
+    <form asp-action="UpdateCart" method="post">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên xe</th>
+                    <th>Hãng xe</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].Xe.Thinh_TenXe</td>
+                        <td>@Model[i].Xe.Thinh_HangXe?.Thinh_TenHang</td>
+                        <td>@Model[i].Xe.Thinh_Gia.ToString("N0") VNĐ</td>
+                        <td>
+                            <input type="hidden" name="cartItems[@i].Thinh_XeID" value="@Model[i].Thinh_XeID" />
+                            <input type="number" name="cartItems[@i].SoLuong" value="@Model[i].SoLuong" min="1" class="form-control" style="width:80px;display:inline;" />
+                        </td>
+                        <td>@(Model[i].Xe.Thinh_Gia * Model[i].SoLuong).VNĐ</td>
+                        <td>
+                            <form asp-action="RemoveFromCart" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@Model[i].Thinh_XeID" />
+                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Cập nhật giỏ hàng</button>
+        <a asp-action="Checkout" class="btn btn-success">Thanh toán</a>
+    </form>
+}

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NguyenVanThinh_BaiTap.Migrations
 {
     /// <inheritdoc />
-    public partial class ThinhQLXe : Migration
+    public partial class QuanLyXe : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
                 {
                     Thinh_DonHangID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaDonHang = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    MaDonHang = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     NgayDatHang = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TenKhachHang = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
@@ -25,7 +25,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
                     DiaChi = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     TongTien = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GhiChu = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    TrangThai = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TrangThai = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     NgayGiao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PhuongThucThanhToan = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
@@ -80,7 +80,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     DonGia = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ThanhTien = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

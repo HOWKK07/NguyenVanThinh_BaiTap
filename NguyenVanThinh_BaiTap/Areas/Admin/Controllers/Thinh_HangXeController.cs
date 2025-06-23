@@ -58,18 +58,18 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Thinh_HangXe/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Thinh_TenHang")] Thinh_HangXe hangXe)
+        public IActionResult Create(Thinh_HangXe catagory)
         {
             if (ModelState.IsValid)
             {
-                _hangXeRepository.Create(hangXe);
+                _context.Thinh_HangXe.Add(catagory);
+                _context.SaveChanges();
                 TempData["SuccessMessage"] = "Thêm hãng xe thành công!";
                 return RedirectToAction(nameof(Index));
             }
-            return View(hangXe);
+            return View(catagory);
         }
 
         // GET: Admin/Thinh_HangXe/Edit/5
@@ -80,20 +80,20 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hangXe = _hangXeRepository.GetById(id.Value);
-            if (hangXe == null)
+            var catagoy = _hangXeRepository.GetById(id.Value);
+            if (catagoy == null)
             {
                 return NotFound();
             }
-            return View(hangXe);
+            return View(catagoy);
         }
 
         // POST: Admin/Thinh_HangXe/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Thinh_HangXeID,Thinh_TenHang")] Thinh_HangXe hangXe)
+        public async Task<IActionResult> Edit(int id, [Bind("Thinh_HangXeID,Thinh_TenHang")] Thinh_HangXe catagory)
         {
-            if (id != hangXe.Thinh_HangXeID)
+            if (id != catagory.Thinh_HangXeID)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
             {
                 try
                 {
-                    _hangXeRepository.Edit(hangXe);
+                    _hangXeRepository.Edit(catagory);
                     TempData["SuccessMessage"] = "Cập nhật hãng xe thành công!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HangXeExists(hangXe.Thinh_HangXeID))
+                    if (!HangXeExists(catagory.Thinh_HangXeID))
                     {
                         return NotFound();
                     }
@@ -118,7 +118,7 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(hangXe);
+            return View(catagory);
         }
 
         // GET: Admin/Thinh_HangXe/Delete/5
@@ -129,16 +129,16 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hangXe = await _context.Thinh_HangXe
+            var category = await _context.Thinh_HangXe
                 .Include(h => h.Thinh_Xe)
                 .FirstOrDefaultAsync(m => m.Thinh_HangXeID == id);
 
-            if (hangXe == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(hangXe);
+            return View(category);
         }
 
         // POST: Admin/Thinh_HangXe/Delete/5
@@ -146,11 +146,11 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hangXe = await _context.Thinh_HangXe
+            var category = await _context.Thinh_HangXe
                 .Include(h => h.Thinh_Xe)
                 .FirstOrDefaultAsync(h => h.Thinh_HangXeID == id);
 
-            if (hangXe.Thinh_Xe.Any())
+            if (category.Thinh_Xe.Any())
             {
                 TempData["ErrorMessage"] = "Không thể xóa hãng xe này vì còn xe thuộc hãng!";
                 return RedirectToAction(nameof(Index));

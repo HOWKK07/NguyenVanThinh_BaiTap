@@ -1,0 +1,58 @@
+﻿@model NguyenVanThinh_BaiTap.Models.Thinh_DonHang
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <strong>Thông tin đơn hàng</strong>
+    </div>
+    <div class="card-body">
+        <p><strong>Mã đơn hàng:</strong> @Model.MaDonHang</p>
+        <p><strong>Ngày đặt:</strong> @Model.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><strong>Khách hàng:</strong> @Model.TenKhachHang</p>
+        <p><strong>Số điện thoại:</strong> @Model.SoDienThoai</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Địa chỉ:</strong> @Model.DiaChi</p>
+        <p><strong>Ghi chú:</strong> @Model.GhiChu</p>
+        <p><strong>Phương thức thanh toán:</strong> @Model.PhuongThucThanhToan</p>
+        <p><strong>Trạng thái:</strong> @Model.TrangThai</p>
+        <p><strong>Tổng tiền:</strong> @Model.TongTien.ToString("N0") VNĐ</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <strong>Chi tiết đơn hàng</strong>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên xe</th>
+                    <th>Hãng xe</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ct in Model.Thinh_ChiTietDonHang)
+                {
+                    <tr>
+                        <td>@ct.Thinh_Xe?.Thinh_TenXe</td>
+                        <td>@ct.Thinh_Xe?.Thinh_HangXe?.Thinh_TenHang</td>
+                        <td>@ct.DonGia.ToString("N0") VNĐ</td>
+                        <td>@ct.SoLuong</td>
+                        <td>@(ct.DonGia* ct.SoLuong).VNĐ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Quay lại danh sách</a>

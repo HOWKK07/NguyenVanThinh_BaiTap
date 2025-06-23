@@ -12,8 +12,8 @@ using NguyenVanThinh_BaiTap.Data;
 namespace NguyenVanThinh_BaiTap.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250622234443_ThinhQLXe")]
-    partial class ThinhQLXe
+    [Migration("20250623023445_QuanLyXe")]
+    partial class QuanLyXe
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,7 @@ namespace NguyenVanThinh_BaiTap.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("GhiChu")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
@@ -84,7 +83,6 @@ namespace NguyenVanThinh_BaiTap.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("MaDonHang")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -113,7 +111,6 @@ namespace NguyenVanThinh_BaiTap.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TrangThai")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 

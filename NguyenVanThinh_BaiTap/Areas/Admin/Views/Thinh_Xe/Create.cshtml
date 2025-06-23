@@ -2,8 +2,20 @@
 @{
     ViewData["Title"] = "Thêm Xe";
 }
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
 <h2>@ViewData["Title"]</h2>
 <form asp-action="Create" method="post">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="mb-3">
         <label asp-for="Thinh_TenXe" class="form-label"></label>
         <input asp-for="Thinh_TenXe" class="form-control" />
@@ -27,3 +39,7 @@
     <button type="submit" class="btn btn-success">Lưu</button>
     <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

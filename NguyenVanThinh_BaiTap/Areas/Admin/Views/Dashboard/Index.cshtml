@@ -1,0 +1,175 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dashboard-card {
+        border-radius: 10px;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+        .dashboard-card h5 {
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .dashboard-card h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+    .bg-dashboard-blue {
+        background: #1976d2 !important;
+        color: #fff !important;
+    }
+
+    .bg-dashboard-green {
+        background: #218838 !important;
+        color: #fff !important;
+    }
+
+    .bg-dashboard-yellow {
+        background: #ffc107 !important;
+        color: #222 !important;
+    }
+
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .chart-container {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="dashboard-title">Dashboard</div>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="dashboard-card bg-dashboard-blue">
+                <h5>Số lượng khách hàng</h5>
+                <h2>@ViewBag.TotalCustomers</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card bg-dashboard-green">
+                <h5>Số lượng đơn hàng</h5>
+                <h2>@ViewBag.TotalOrders</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card bg-dashboard-yellow">
+                <h5>Tổng doanh số</h5>
+                <h2>@ViewBag.TotalRevenue.ToString("N0") VNĐ</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 chart-container">
+            <h5 class="text-center mb-3">Biểu đồ số lượng đơn hàng theo ngày</h5>
+            <canvas id="ordersChart"></canvas>
+        </div>
+        <div class="col-md-6 chart-container">
+            <h5 class="text-center mb-3">Biểu đồ doanh số theo ngày</h5>
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/Admin/Dashboard/GetChartData')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || data.length === 0) {
+                    console.warn("Không có dữ liệu trả về từ API.");
+                    return;
+                }
+
+                let dates = data.map(d => d.date);
+                let orders = data.map(d => d.orders);
+                let revenue = data.map(d => d.revenue);
+
+                // Đơn hàng chart
+                const ordersChartCanvas = document.getElementById('ordersChart');
+                if (ordersChartCanvas) {
+                    const ctxOrders = ordersChartCanvas.getContext('2d');
+                    new Chart(ctxOrders, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Số lượng đơn hàng',
+                                data: orders,
+                                backgroundColor: 'rgba(33, 150, 243, 0.15)',
+                                borderColor: '#1976d2',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                pointBackgroundColor: '#1976d2'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: true }
+                            }
+                        }
+                    });
+                }
+
+                // Doanh số chart
+                const revenueChartCanvas = document.getElementById('revenueChart');
+                if (revenueChartCanvas) {
+                    const ctxRevenue = revenueChartCanvas.getContext('2d');
+                    new Chart(ctxRevenue, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Doanh số (VNĐ)',
+                                data: revenue,
+                                backgroundColor: 'rgba(255, 193, 7, 0.15)',
+                                borderColor: '#ff6384',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                pointBackgroundColor: '#ff6384'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: { display: true }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải dữ liệu biểu đồ:", error);
+            });
+    });
+</script>

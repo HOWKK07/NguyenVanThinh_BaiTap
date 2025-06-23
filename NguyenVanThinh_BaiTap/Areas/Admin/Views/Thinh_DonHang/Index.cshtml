@@ -1,0 +1,51 @@
+﻿@model IEnumerable<NguyenVanThinh_BaiTap.Models.Thinh_DonHang>
+@{
+    ViewData["Title"] = "Danh sách Đơn Hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Tìm kiếm đơn hàng..." class="form-control" style="width:300px;display:inline-block;" />
+    <button type="submit" class="btn btn-primary">Tìm</button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã Đơn Hàng</th>
+            <th>Ngày Đặt</th>
+            <th>Khách Hàng</th>
+            <th>Số Điện Thoại</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDonHang</td>
+                <td>@item.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.TenKhachHang</td>
+                <td>@item.SoDienThoai</td>
+                <td>@item.TongTien.ToString("N0") VNĐ</td>
+                <td>
+                    <span class="badge @(item.TrangThai == "Đã giao" ? "bg-success" : item.TrangThai == "Đang giao" ? "bg-warning" : "bg-info")">
+                        @item.TrangThai
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Thinh_DonHangID" class="btn btn-info btn-sm">Chi tiết</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}

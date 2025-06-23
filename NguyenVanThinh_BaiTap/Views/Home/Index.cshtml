@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NguyenVanThinh_BaiTap.Models.Thinh_Xe>
+﻿@model List<NguyenVanThinh_BaiTap.Models.Thinh_Xe>
 @{
     ViewData["Title"] = "Danh sách xe";
 }
@@ -40,6 +40,7 @@
                 <div class="card-footer">
                     <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post" class="d-inline">
                         <input type="hidden" name="id" value="@xe.Thinh_XeID" />
+
                         <button type="submit" class="btn btn-primary btn-sm">
                             <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
                         </button>

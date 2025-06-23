@@ -1,31 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace NguyenVanThinh_BaiTap.Models
 {
     public class Thinh_Xe
     {
         [Key]
-        public int Thinh_XeID { get; set; } // Đã sửa từ Ten_XeID
+        public int Thinh_XeID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên xe là bắt buộc")]
         [StringLength(200)]
         public string Thinh_TenXe { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mã hãng xe là bắt buộc")]
         [ForeignKey("Thinh_HangXe")]
         public int Thinh_HangXeID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Giá là bắt buộc")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Thinh_Gia { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ngày sản xuất là bắt buộc")]
         public DateTime Thinh_NgaySanXuat { get; set; }
 
-        // Navigation property
+        [ValidateNever]
         public virtual Thinh_HangXe Thinh_HangXe { get; set; }
-        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
 
+        [ValidateNever]
+        public virtual ICollection<Thinh_ChiTietDonHang> Thinh_ChiTietDonHang { get; set; }
     }
 }

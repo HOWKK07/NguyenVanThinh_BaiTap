@@ -66,15 +66,17 @@ namespace NguyenVanThinh_BaiTap.Areas.Admin.Controllers
         // POST: Admin/Thinh_Xe/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Thinh_TenXe,Thinh_HangXeID,Thinh_Gia,Thinh_NgaySanXuat")] Thinh_Xe xe)
+        public async Task<IActionResult> Create(Thinh_Xe xe)
         {
             if (ModelState.IsValid)
             {
-                _xeRepository.Add(xe);
+                _context.Add(xe);
+                await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm xe thành công!";
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Thinh_HangXeID"] = new SelectList(_hangXeRepository.GetAll(), "Thinh_HangXeID", "Thinh_TenHang", xe.Thinh_HangXeID);
+            // Nếu lỗi, nạp lại danh sách hãng xe cho dropdown
+            ViewData["Thinh_HangXeID"] = new SelectList(_context.Thinh_HangXe, "Thinh_HangXeID", "Thinh_TenHang", xe.Thinh_HangXeID);
             return View(xe);
         }
 
